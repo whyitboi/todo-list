@@ -1,0 +1,38 @@
+import path from "node:path";
+import HtmlwebpackPlugin from "html-webpack-plugin";
+import { title } from "node:process";
+
+export default {
+  entry: "./src/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(import.meta.dirname, "dist"),
+    clean: true,
+  },
+  plugins: [
+    new HtmlwebpackPlugin({
+      template: "./src/template.html",
+      //   title: "Production",
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.html$/i,
+        use: ["html-loader"],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
+      },
+    ],
+  },
+};
