@@ -1,7 +1,9 @@
 // to change the completed status of the todo
 
-import { Todo } from "./todos.js";
+import { todo } from "./todos.js";
 
-const markComplete = (Todo) => {
-  this.completed = true;
+const markComplete = (todo) => {
+  todo.completed = true;
 };
+
+export { markComplete };
