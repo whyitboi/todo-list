@@ -1,6 +1,7 @@
 //create Todos as a class
+//const todoArray = [];
 
-class Todo {
+export class Todo {
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
@@ -10,5 +11,11 @@ class Todo {
     //   this.notes = notes;
     this.completed = false;
   }
+
+  //can just include the methid here, but I want to pass objects via modules
+
+  //   markComplete() {
+  //     this.completed = true;
+  //   }
 }
-export { Todo };
+//export { Todo, todoArray };
