@@ -4,6 +4,17 @@ import { displayHome } from "./home.js";
 import { displayMenu } from "./menu.js";
 import { displayAbout } from "./about.js";
 
+import { Todo } from "./todos.js";
+
+const todo = new Todo(
+  "Study Javascript",
+  "Complete Todo List",
+  "2026-09-05",
+  "high",
+);
+
+console.log(todo);
+
 //change code to follow Open-closed principle
 //remove switch case
 
