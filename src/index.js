@@ -8,6 +8,7 @@ import { Todo } from "./todos.js";
 import { markComplete } from "./markComplete.js";
 import { Project, userProjects } from "./projects.js";
 import { moveTodo } from "./moveTodo.js";
+import { store, retrieve } from "./storage.js";
 
 //switch this to dynamic creation
 const todo = new Todo(
@@ -52,6 +53,10 @@ myProject1.addTodo(todo, todo1, todo2);
 
 console.log(myProject);
 console.log(myProject1);
+
+//retireve and store working fine
+//store(admin);
+//console.log(retrieve());
 
 moveTodo(myProject1, myProject, todo2);
 
