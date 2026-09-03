@@ -7,15 +7,20 @@ import { displayAbout } from "./about.js";
 import { Todo } from "./todos.js";
 import { markComplete } from "./markComplete.js";
 import { Project, userProjects } from "./projects.js";
-import { moveTodo } from "./moveTodoBetweenProjects.js";
-import { addTodo } from "./addTodoToProject.js";
+import { moveTodo } from "./moveTodo.js";
 
 //switch this to dynamic creation
 const todo = new Todo(
   "Study Javascript",
   "Complete Todo List",
   "2026-09-05",
-  "high",
+  "medium",
+);
+const todo2 = new Todo(
+  "Sleept",
+  "Rest is important try to get some",
+  "2026-09-15",
+  "low",
 );
 const todo1 = new Todo(
   "Get Milk",
@@ -34,22 +39,23 @@ const myProject1 = new Project(
   "This will test multiple project stuff",
 );
 
-//make push to userProjects and todoArray dynamic
-userProjects.push(myProject, myProject1);
+//made userProjects Basically a user
+const admin = new userProjects("admin");
+admin.addProjects(myProject, myProject1);
 
 //console.log(myProject);
-console.log(userProjects);
+console.log(admin);
 
 //console.log(todo);
-addTodo(myProject, todo);
-addTodo(myProject1, todo1);
+myProject.addTodo(todo, todo1);
+myProject1.addTodo(todo, todo1, todo2);
 
 console.log(myProject);
 console.log(myProject1);
 
-moveTodo(myProject, myProject1, "Study Javascript");
-//change code to follow Open-closed principle
-//remove switch case
+moveTodo(myProject1, myProject, todo2);
+
+//myProject.deleteTodo(todo);
 
 //pages holds key and value. Value is function name but not called until clicked.
 //see event listener
