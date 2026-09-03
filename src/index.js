@@ -4,9 +4,15 @@ import { displayHome } from "./home.js";
 import { displayMenu } from "./menu.js";
 import { displayAbout } from "./about.js";
 
-import { Todo } from "./todos.js";
+import { Todo, editTodoDes, changePriority } from "./todos.js";
 import { markComplete } from "./markComplete.js";
-import { Project, userProjects } from "./projects.js";
+import {
+  Project,
+  userProjects,
+  addProjects,
+  addTodo,
+  deleteTodo,
+} from "./projects.js";
 import { moveTodo } from "./moveTodo.js";
 import { store, retrieve } from "./storage.js";
 
@@ -42,14 +48,20 @@ const myProject1 = new Project(
 
 //made userProjects Basically a user
 const admin = new userProjects("admin");
-admin.addProjects(myProject, myProject1);
+addProjects(admin, myProject, myProject1);
 
 //console.log(myProject);
 console.log(admin);
 
 //console.log(todo);
-myProject.addTodo(todo, todo1);
-myProject1.addTodo(todo, todo1, todo2);
+addTodo(myProject, todo, todo1);
+addTodo(myProject1, todo, todo1, todo2);
+
+//change priority working fine
+//changePriority(todo1, 3);
+
+//edit descript works fine
+//editTodoDes(todo, "I can edit the description");
 
 console.log(myProject);
 console.log(myProject1);

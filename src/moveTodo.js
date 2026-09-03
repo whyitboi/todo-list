@@ -1,4 +1,4 @@
-//import {userProjectsFrom, userProjectsTo, todoList} from "./index.js"
+import { addTodo } from "./projects.js";
 export const moveTodo = (projectFrom, projectTo, Todo) => {
   projectFrom.todoLists.forEach((todo) => {
     const index = projectFrom.todoLists.indexOf(Todo);
@@ -6,7 +6,7 @@ export const moveTodo = (projectFrom, projectTo, Todo) => {
     if (index === -1) return;
 
     const todoToMove = projectFrom.todoLists.splice(index, 1)[0]; //returns array of spliced items.
-    projectTo.addTodo(todoToMove);
+    addTodo(projectTo, todoToMove);
     // console.log(`Found at index ${index}`);
   });
 };
