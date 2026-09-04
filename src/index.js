@@ -15,6 +15,7 @@ import {
 } from "./projects.js";
 import { moveTodo } from "./moveTodo.js";
 import { store, retrieve } from "./storage.js";
+import { addTodoToPrpject, editTodoToPrpject, user } from "./app.js";
 
 //switch this to dynamic creation
 const todo = new Todo(
@@ -47,21 +48,21 @@ const myProject1 = new Project(
 );
 
 //made userProjects Basically a user
-const admin = new userProjects("admin");
-addProjects(admin, myProject, myProject1);
+//const admin = new userProjects("admin");
+addProjects(user, myProject, myProject1);
 
 //console.log(myProject);
-console.log(admin);
+console.log(user);
 
-//console.log(todo);
-addTodo(myProject, todo, todo1);
-addTodo(myProject1, todo, todo1, todo2);
+//application state
+addTodoToPrpject(myProject, todo, todo1);
+addTodoToPrpject(myProject1, todo, todo1, todo2);
 
 //change priority working fine
 //changePriority(todo1, 3);
 
 //edit descript works fine
-//editTodoDes(todo, "I can edit the description");
+editTodoToPrpject(todo, "I can edit the description");
 
 console.log(myProject);
 console.log(myProject1);

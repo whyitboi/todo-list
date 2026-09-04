@@ -1,5 +1,5 @@
 function store(userProjects) {
-  //first read the Projects array into a variable
+  console.log(JSON.stringify(userProjects, null, 2));
   localStorage.setItem("Projects", JSON.stringify(userProjects));
 }
 
