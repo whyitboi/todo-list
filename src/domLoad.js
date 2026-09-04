@@ -2,14 +2,16 @@ function domLoad() {
   const content = document.getElementById("content");
   const con = document.querySelector(".con");
   //con.setAttribute("class", "con");
-  con.appendChild(sidebar);
-  content.textContent = "some stuff";
+  //con.appendChild(sidebar);
 
   const sidebar = document.createElement("div");
   const dashboard = document.createElement("div");
   const header = document.createElement("div");
   const article = document.createElement("div");
   const linkList = document.createElement("ul");
+
+  content.textContent = "some stuff";
+  con.textContent = "Yo";
 
   sidebar.setAttribute("class", "sidebar");
   dashboard.setAttribute("class", "dashboard");
