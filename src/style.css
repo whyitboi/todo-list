@@ -1,5 +1,5 @@
 /*fonts*/
-@font-face {
+/* @font-face {
   font-family: "doods";
   src:
     url("./fonts/digory_doodles_ps-webfont.woff2") format("woff2"),
@@ -48,27 +48,32 @@
   --_fontColor: var(--fontColor, inherit);
   --_padding: var(--padding, inherit);
   --_fontSize: var(--fontSize, inherit);
-}
+} */
 /*variables*/
-:root {
+/* :root {
   --_fontFamily: var(--fontFamily, "doods");
   --_fontSize: var(--fontSize, var(clamp(1em, 0.5em, +1.5vw, 2rem), 24px));
   --_fontColor: var(--fontColor, white);
   --_padding: var(--padding, 30px);
-}
+} */
 
-body {
+/* body {
   display: grid;
   height: 100vh;
   grid-template-rows: auto repeat(2, 1fr);
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    /*for black overlay to improve readbility*/ url("./background-img1.jpg");
+    /for black overlay to improve readbility* url("./background-img1.jpg");
   background-size: cover;
   position: relative;
+} */
+.card {
+  border-collapse: collapse;
+  border: 2px solid black;
+  padding: 50px;
 }
 
-#content {
+/* #content {
   --fontSize: 1.2em;
   line-height: 1.5em;
   grid-column: 1/4;
@@ -90,13 +95,13 @@ h2 {
   color: white;
   text-align: center;
   grid-column: 1/4;
-}
-#content > div {
+} */
+/* #content > div {
   grid-column: 1/4;
   padding: var(--_padding);
-  /* text-align: center; */
-}
-nav {
+ 
+} */
+/* nav {
   padding: var(--_padding);
   max-height: fit-content;
   padding-left: 0;
@@ -110,10 +115,10 @@ button {
 
   font-family: var(--_fontFamily);
   padding: var(--_padding);
-}
+} */
 
 /*photo credit*/
-a {
+/* a {
   text-decoration: none;
   color: unset;
 }
@@ -124,4 +129,4 @@ a {
   right: 10px;
   color: var(--_fontColor);
   font-size: var(--_fontSize);
-}
+} */

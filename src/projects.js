@@ -23,22 +23,23 @@ class Project {
 
 function addTodo(project, ...todo) {
   project.todoLists.push(...todo);
-  //store after add
 }
 
 function deleteTodo(project, ...todos) {
   //straightforward with filter and includes
-  project.todoLists.filter = project.todoLists.filter((todo) => {
+  project.todoLists = project.todoLists.filter((todo) => {
     return !todos.includes(todo);
   });
-  //store after del
-
-  // todo.forEach((todo) => {
-  //   const index = project.todoLists.indexOf(todo);
-  //   if (index !== -1) {
-  //     project.todoLists.splice(index, 1);
-  //   }
-  // });
+}
+function getProjectId(project) {
+  return project.projectId;
 }
 
-export { Project, userProjects, addProjects, addTodo, deleteTodo };
+export {
+  Project,
+  userProjects,
+  getProjectId,
+  addProjects,
+  addTodo,
+  deleteTodo,
+};
