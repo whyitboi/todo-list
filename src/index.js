@@ -9,11 +9,11 @@ import { addTodoToPrpject, editTodoToPrpject, user, todo } from "./app.js";
 
 domLoad();
 
-const cards = document.querySelectorAll(".card");
-//console.log(cards);
+// const cards = document.querySelectorAll(".card");
+// //console.log(cards);
 
-cards.forEach((card) => {
-  card.addEventListener("click", () => {
-    card.textContent = card.getAttribute("id");
-  });
-});
+// cards.forEach((card) => {
+//   card.addEventListener("click", () => {
+//     card.textContent = card.getAttribute("id");
+//   });
+// });

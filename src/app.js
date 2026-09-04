@@ -25,9 +25,9 @@ const todo = new Todo(
   "medium",
 );
 const todo1 = new Todo(
-  "Study Javascript",
-  "Complete Todo List",
-  "2026-09-05",
+  "Build Todo App",
+  "Going smoothly",
+  "2026-12-05",
   "medium",
 );
 //console.log(user.userProjectsArray.length);

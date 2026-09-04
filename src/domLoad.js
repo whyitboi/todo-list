@@ -1,11 +1,24 @@
 import { currentProject, projectsArray } from "./app.js";
+import { todosLoad } from "./todosLoad.js";
 
 function createCards(parent, array, nameOfClass) {
   //create the cards loop
   array.forEach((project) => {
     let card = document.createElement("div");
     card.setAttribute("class", nameOfClass);
-    card.setAttribute("id", project.projectId);
+
+    let paraName = document.createElement("p");
+    let paraDesc = document.createElement("p");
+    paraName.textContent = project.name;
+    paraDesc.textContent = project.description;
+    card.append(paraName, paraDesc);
+    card.addEventListener("click", () => {
+      if (project.todoLists.length < 1) {
+        card.textContent = `There are no ToDo lists for: ${project.name}`;
+      } else todosLoad(project.todoLists);
+    });
+
+    // card.setAttribute("id", project.projectId);
     parent.appendChild(card);
   });
 }
