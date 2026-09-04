@@ -28,7 +28,7 @@ function addTodo(project, ...todo) {
 
 function deleteTodo(project, ...todos) {
   //straightforward with filter and includes
-  project.todoLists.filter((todo) => {
+  project.todoLists.filter = project.todoLists.filter((todo) => {
     return !todos.includes(todo);
   });
   //store after del
