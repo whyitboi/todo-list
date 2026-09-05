@@ -17,7 +17,7 @@ function todosLoad(todoArr) {
     paraDesc.textContent = todo.description;
     paradueDate.textContent = todo.dueDate;
     editBtn.addEventListener("click", () => {
-      console.log("edit todo function here. Open as form"); //ediTodoDesc(todo, "text from user");
+      todoEditLoad(todo);
     });
 
     todoCard.append(paraTitle, paraDesc, paradueDate, editBtn);
@@ -26,4 +26,82 @@ function todosLoad(todoArr) {
   });
   article.replaceChildren(todoCardWrapper);
 }
+
+function todoEditLoad(todo) {
+  const article = document.querySelector(".article");
+  const dialog = document.createElement("dialog");
+  const todoForm = document.createElement("form");
+  const inputRowDiv = document.createElement("div");
+  const buttonRow = document.createElement("div");
+  const title = document.createElement("legend");
+  const dateLabel = document.createElement("label");
+  const descLabel = document.createElement("label");
+  const saveBtn = document.createElement("button");
+  const cancelBtn = document.createElement("button");
+
+  let dueDate = document.createElement("input");
+  let desc = document.createElement("textarea");
+
+  dateLabel.textContent = "Date";
+  descLabel.textContent = "Description";
+
+  inputRowDiv.setAttribute("class", "form-row");
+  dialog.setAttribute("id", "todoDialog");
+
+  Object.assign(buttonRow, {
+    id: "button-row",
+    class: "form-row",
+  });
+
+  Object.assign(cancelBtn, {
+    type: "button",
+    class: "submit",
+    value: "cancel",
+  });
+
+  Object.assign(saveBtn, {
+    type: "button",
+    class: "submit",
+    value: "save",
+  });
+
+  Object.assign(todoForm, {
+    class: "edit-todo",
+    action: "#",
+    method: "dialog",
+  });
+
+  Object.assign(desc.style, {
+    width: "300px",
+    height: "150px",
+    resize: "none",
+  });
+
+  title.textContent = todo.title;
+  dueDate.textContent = todo.dueDate;
+  desc.textContent = todo.description;
+  cancelBtn.textContent = "Cancel";
+  saveBtn.textContent = "Save";
+
+  inputRowDiv.append(dateLabel, dueDate, descLabel, desc);
+  buttonRow.append(cancelBtn, saveBtn);
+  todoForm.append(title, inputRowDiv, buttonRow);
+  dialog.appendChild(todoForm);
+  article.appendChild(dialog);
+  dialog.showModal();
+
+  const buttons = document.querySelectorAll("button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      dialog.close(button.value);
+    });
+  });
+
+  dialog.addEventListener("close", () => {
+    console.log(dialog.returnValue);
+  });
+
+  //console.log(pressedBtn);
+}
+
 export { todosLoad };
