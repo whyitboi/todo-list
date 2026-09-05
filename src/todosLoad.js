@@ -100,8 +100,6 @@ function todoEditLoad(todo) {
   dialog.addEventListener("close", () => {
     console.log(dialog.returnValue);
   });
-
-  //console.log(pressedBtn);
 }
 
 export { todosLoad };
