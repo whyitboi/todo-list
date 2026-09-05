@@ -1,4 +1,4 @@
-import { editTodoDes } from "./todos.js";
+import { editTodoToPrpject } from "./app.js";
 
 function todosLoad(todoArr) {
   const article = document.querySelector(".article");
@@ -97,8 +97,14 @@ function todoEditLoad(todo) {
     });
   });
 
+  desc.addEventListener("input", () => {
+    desc.textContent = desc.value;
+  });
+
   dialog.addEventListener("close", () => {
-    console.log(dialog.returnValue);
+    if (dialog.returnValue === "save") {
+      editTodoToPrpject(todo, desc.textContent);
+    }
   });
 }
 

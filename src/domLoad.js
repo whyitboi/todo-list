@@ -1,4 +1,4 @@
-import { currentProject, projectsArray } from "./app.js";
+import { projectsArray } from "./app.js";
 import { todosLoad } from "./todosLoad.js";
 
 function createCards(parent, array, nameOfClass) {
