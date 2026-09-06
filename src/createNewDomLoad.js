@@ -95,7 +95,8 @@ export function createNewTodoLoad(projectsArray) {
   dialog.addEventListener("close", () => {
     if (dialog.returnValue === "save") {
       const selectedProject = projectsArray.find((project) => {
-        project.projectId === projectSelect.selectedOptions;
+        console.log(project.projectId);
+        project.projectId === projectSelect.value;
       });
 
       const todo = new Todo(title.value, desc.value, dueDate.value, "medium");
