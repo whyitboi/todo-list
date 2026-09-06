@@ -1,40 +1,17 @@
 import { format } from "date-fns";
-import { editTodoToProject } from "./app.js";
+import { Todo } from "./todos.js";
+import { addTodoToProject } from "./app.js";
+import { domLoad } from "./domLoad.js";
 
-function todosLoad(todoArr) {
-  const article = document.querySelector(".article");
-  const todoCardWrapper = document.createElement("div");
-
-  todoArr.forEach((todo) => {
-    let todoCard = document.createElement("div");
-    let paraTitle = document.createElement("p");
-    let paraDesc = document.createElement("p");
-    let paradueDate = document.createElement("p");
-    let editBtn = document.createElement("button");
-    editBtn.textContent = "Edit Todo";
-    todoCard.setAttribute("class", "card");
-
-    paraTitle.textContent = todo.title;
-    paraDesc.textContent = todo.description;
-    paradueDate.textContent = todo.dueDate;
-    editBtn.addEventListener("click", () => {
-      todoEditLoad(todo, todoArr);
-    });
-
-    todoCard.append(paraTitle, paraDesc, paradueDate, editBtn);
-
-    todoCardWrapper.append(todoCard);
-  });
-  article.replaceChildren(todoCardWrapper);
-}
-
-function todoEditLoad(todo, todoArr) {
+export function createNewTodoLoad(projectsArray) {
   const article = document.querySelector(".article");
   const dialog = document.createElement("dialog");
   const todoForm = document.createElement("form");
-  const inputRowDiv = document.createElement("div");
+  const inputRowOneDiv = document.createElement("div");
+  const inputRowTwoDiv = document.createElement("div");
   const buttonRow = document.createElement("div");
-  const title = document.createElement("legend");
+  const titleLabel = document.createElement("label");
+  const projectLabel = document.createElement("label");
   const dateLabel = document.createElement("label");
   const descLabel = document.createElement("label");
   const saveBtn = document.createElement("button");
@@ -42,11 +19,25 @@ function todoEditLoad(todo, todoArr) {
 
   let dueDate = document.createElement("input");
   let desc = document.createElement("textarea");
+  let title = document.createElement("input");
+  let projectSelect = document.createElement("select");
 
-  dateLabel.textContent = "Date";
+  projectsArray.forEach((project) => {
+    const option = document.createElement("option");
+
+    option.textContent = project.name;
+    option.value = project.projectId;
+
+    projectSelect.appendChild(option);
+  });
+
+  titleLabel.textContent = "Title";
+  projectLabel.textContent = "Project";
+  dateLabel.textContent = "Due Date";
   descLabel.textContent = "Description";
 
-  inputRowDiv.setAttribute("class", "form-row");
+  inputRowOneDiv.setAttribute("class", "form-row");
+  inputRowTwoDiv.setAttribute("class", "form-row");
   dialog.setAttribute("id", "todoDialog");
 
   Object.assign(buttonRow, {
@@ -56,7 +47,6 @@ function todoEditLoad(todo, todoArr) {
   Object.assign(dueDate, {
     type: "date",
     min: format(new Date(), "yyyy-MM-dd"),
-    value: todo.dueDate,
   });
 
   Object.assign(cancelBtn, {
@@ -72,7 +62,7 @@ function todoEditLoad(todo, todoArr) {
   });
 
   Object.assign(todoForm, {
-    class: "edit-todo",
+    class: "new-todo",
     action: "#",
     method: "dialog",
   });
@@ -83,15 +73,13 @@ function todoEditLoad(todo, todoArr) {
     resize: "none",
   });
 
-  title.textContent = todo.title;
-  //dueDate.textContent = todo.dueDate;
-  desc.textContent = todo.description;
   cancelBtn.textContent = "Cancel";
   saveBtn.textContent = "Save";
 
-  inputRowDiv.append(dateLabel, dueDate, descLabel, desc);
+  inputRowOneDiv.append(titleLabel, title, projectLabel, projectSelect);
+  inputRowTwoDiv.append(dateLabel, dueDate, descLabel, desc);
   buttonRow.append(cancelBtn, saveBtn);
-  todoForm.append(title, inputRowDiv, buttonRow);
+  todoForm.append(inputRowOneDiv, inputRowTwoDiv, buttonRow);
   dialog.appendChild(todoForm);
   article.appendChild(dialog);
 
@@ -106,10 +94,15 @@ function todoEditLoad(todo, todoArr) {
 
   dialog.addEventListener("close", () => {
     if (dialog.returnValue === "save") {
-      editTodoToProject(todo, desc.value, dueDate.value);
-      todosLoad(todoArr);
+      const selectedProject = projectsArray.find((project) => {
+        project.projectId === projectSelect.selectedOptions;
+      });
+
+      const todo = new Todo(title.value, desc.value, dueDate.value, "medium");
+      console.log(projectSelect.selectedOptions);
+      console.log(selectedProject);
+      addTodoToProject(selectedProject, todo);
+      domLoad();
     }
   });
 }
-
-export { todosLoad };

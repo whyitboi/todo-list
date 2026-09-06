@@ -22,6 +22,9 @@ class Project {
 }
 
 function addTodo(project, ...todo) {
+  if (!project.todoLists) {
+    project.todoLists = [];
+  }
   project.todoLists.push(...todo);
 }
 

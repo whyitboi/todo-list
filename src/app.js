@@ -41,19 +41,19 @@ if (!user) {
 const currentProject = user.userProjectsArray[0];
 const projectsArray = user.userProjectsArray;
 
-function addTodoToPrpject(project, ...todo) {
+function addTodoToProject(project, ...todo) {
   addTodo(project, ...todo);
   store(user);
 }
-function editTodoToPrpject(todo, desc, date) {
+function editTodoToProject(todo, desc, date) {
   editTodoDes(todo, desc);
   editTodoDate(todo, date);
   store(user);
 }
 
 export {
-  addTodoToPrpject,
-  editTodoToPrpject,
+  addTodoToProject,
+  editTodoToProject,
   user,
   todo,
   todo1,
