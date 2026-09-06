@@ -27,12 +27,10 @@ function changePriority(todo, number) {
 
 function editTodoDes(todo, description) {
   todo.description = description;
-  //save edit here
 }
 
-function editTodoDate(todo) {
-  //do date edit here
-  //save edit here
+function editTodoDate(todo, date) {
+  todo.dueDate = date;
 }
 
 export { Todo, editTodoDes, editTodoDate, changePriority };

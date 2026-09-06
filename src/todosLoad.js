@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { editTodoToPrpject } from "./app.js";
 
 function todosLoad(todoArr) {
@@ -17,7 +18,7 @@ function todosLoad(todoArr) {
     paraDesc.textContent = todo.description;
     paradueDate.textContent = todo.dueDate;
     editBtn.addEventListener("click", () => {
-      todoEditLoad(todo);
+      todoEditLoad(todo, todoArr);
     });
 
     todoCard.append(paraTitle, paraDesc, paradueDate, editBtn);
@@ -27,7 +28,7 @@ function todosLoad(todoArr) {
   article.replaceChildren(todoCardWrapper);
 }
 
-function todoEditLoad(todo) {
+function todoEditLoad(todo, todoArr) {
   const article = document.querySelector(".article");
   const dialog = document.createElement("dialog");
   const todoForm = document.createElement("form");
@@ -51,6 +52,11 @@ function todoEditLoad(todo) {
   Object.assign(buttonRow, {
     id: "button-row",
     class: "form-row",
+  });
+  Object.assign(dueDate, {
+    type: "date",
+    min: format(new Date(), "yyyy-MM-dd"),
+    value: todo.dueDate,
   });
 
   Object.assign(cancelBtn, {
@@ -78,7 +84,7 @@ function todoEditLoad(todo) {
   });
 
   title.textContent = todo.title;
-  dueDate.textContent = todo.dueDate;
+  //dueDate.textContent = todo.dueDate;
   desc.textContent = todo.description;
   cancelBtn.textContent = "Cancel";
   saveBtn.textContent = "Save";
@@ -88,6 +94,7 @@ function todoEditLoad(todo) {
   todoForm.append(title, inputRowDiv, buttonRow);
   dialog.appendChild(todoForm);
   article.appendChild(dialog);
+
   dialog.showModal();
 
   const buttons = document.querySelectorAll("button");
@@ -97,13 +104,10 @@ function todoEditLoad(todo) {
     });
   });
 
-  desc.addEventListener("input", () => {
-    desc.textContent = desc.value;
-  });
-
   dialog.addEventListener("close", () => {
     if (dialog.returnValue === "save") {
-      editTodoToPrpject(todo, desc.textContent);
+      editTodoToPrpject(todo, desc.value, dueDate.value);
+      todosLoad(todoArr);
     }
   });
 }

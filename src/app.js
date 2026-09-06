@@ -6,8 +6,9 @@ import {
   addProjects,
   getProjectId,
 } from "./projects.js";
-import { Todo, editTodoDes } from "./todos.js";
-import { domLoad, max } from "./domLoad.js";
+import { Todo, editTodoDes, editTodoDate } from "./todos.js";
+import { domLoad } from "./domLoad.js";
+import { todosLoad } from "./todosLoad.js";
 let user = retrieve();
 
 //switch to dynamic creation
@@ -30,7 +31,6 @@ const todo1 = new Todo(
   "2026-12-05",
   "medium",
 );
-//console.log(user.userProjectsArray.length);
 
 if (!user) {
   user = new userProjects("Guest");
@@ -40,19 +40,14 @@ if (!user) {
 }
 const currentProject = user.userProjectsArray[0];
 const projectsArray = user.userProjectsArray;
-//console.log(projectsArray.todoLists);
-
-//get the projectId. This will be for the event listener
-// const currentProject = user.userProjectsArray.find((project)=>{
-//     return project.projectId === someProjectId
-// })
 
 function addTodoToPrpject(project, ...todo) {
   addTodo(project, ...todo);
   store(user);
 }
-function editTodoToPrpject(todo, text) {
-  editTodoDes(todo, text);
+function editTodoToPrpject(todo, desc, date) {
+  editTodoDes(todo, desc);
+  editTodoDate(todo, date);
   store(user);
 }
 
