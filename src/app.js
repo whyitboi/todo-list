@@ -41,7 +41,7 @@ function addTodoToProject(project, ...todo) {
   store(user);
 }
 function deleteTodoFromProject(project, ...todo) {
-  deleteTodo(project, todo);
+  deleteTodo(project, ...todo);
   store(user);
 }
 function editTodoToProject(todo, desc, date, priority) {

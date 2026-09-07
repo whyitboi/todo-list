@@ -68,7 +68,7 @@ function todosLoad(project) {
               alert("All todos in this project have been completed");
               domLoad();
             } else {
-              todosLoad(todoArr);
+              todosLoad(project);
             }
           }
         });
@@ -78,7 +78,7 @@ function todosLoad(project) {
         });
         deleteBtn.addEventListener("click", () => {
           deleteTodoFromProject(project, todo);
-          if (todoArr.length !== -1) todosLoad(todoArr);
+          if (todoArr.length !== -1) todosLoad(project);
         });
 
         titleLabel.append(paraTitle);
