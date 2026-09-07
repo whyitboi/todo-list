@@ -30,5 +30,19 @@ function editTodoDes(todo, description) {
 function editTodoDate(todo, date) {
   todo.dueDate = date;
 }
+function isCompleted(todo) {
+  todo.completed = true;
+}
+function toggleCompleted(todo) {
+  todo.completed = todo.completed ? false : true;
+  //can be writen as todo.completed = !todo.completed; since its already a boolean value
+}
 
-export { Todo, editTodoDes, editTodoDate, changePriority };
+export {
+  Todo,
+  editTodoDes,
+  editTodoDate,
+  changePriority,
+  isCompleted,
+  toggleCompleted,
+};

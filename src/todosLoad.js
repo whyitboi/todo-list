@@ -1,29 +1,56 @@
 import { format } from "date-fns";
-import { editTodoToProject } from "./app.js";
+import { editTodoToProject, isCompletedTodo } from "./app.js";
 
 function todosLoad(todoArr) {
   const article = document.querySelector(".article");
   const todoCardWrapper = document.createElement("div");
 
   todoArr.forEach((todo) => {
-    let todoCard = document.createElement("div");
-    let paraTitle = document.createElement("p");
-    let paraDesc = document.createElement("p");
-    let paradueDate = document.createElement("p");
-    let editBtn = document.createElement("button");
-    editBtn.textContent = "Edit Todo";
-    todoCard.setAttribute("class", "card");
+    if (!todo.completed) {
+      const todoCard = document.createElement("div");
+      const paraTitle = document.createElement("p");
+      const paraDesc = document.createElement("p");
+      const paradueDate = document.createElement("p");
+      const paraPriority = document.createElement("p");
+      const completedLabel = document.createElement("label");
+      const markComplete = document.createElement("input");
 
-    paraTitle.textContent = todo.title;
-    paraDesc.textContent = todo.description;
-    paradueDate.textContent = todo.dueDate;
-    editBtn.addEventListener("click", () => {
-      todoEditLoad(todo, todoArr);
-    });
+      const editBtn = document.createElement("button");
+      markComplete.type = "checkbox";
+      editBtn.textContent = "Edit Todo";
+      todoCard.setAttribute("class", "card");
 
-    todoCard.append(paraTitle, paraDesc, paradueDate, editBtn);
+      paraTitle.textContent = todo.title;
+      paraDesc.textContent = todo.description;
+      paraPriority.textContent = todo.priority;
+      paradueDate.textContent = todo.dueDate;
+      completedLabel.textContent = "Mark Complete";
 
-    todoCardWrapper.append(todoCard);
+      markComplete.addEventListener("change", () => {
+        if (markComplete.checked) {
+          isCompletedTodo(todo);
+          alert(`${todo.title}: has been marked as Complete`);
+          todosLoad(todoArr);
+        }
+      });
+
+      editBtn.addEventListener("click", () => {
+        todoEditLoad(todo, todoArr);
+      });
+
+      completedLabel.append(markComplete);
+
+      todoCard.append(
+        paraTitle,
+        paraDesc,
+        paradueDate,
+        paraPriority,
+        completedLabel,
+        editBtn,
+      );
+
+      todoCardWrapper.append(todoCard);
+    }
   });
   article.replaceChildren(todoCardWrapper);
 }
