@@ -1,5 +1,5 @@
 import { store, retrieve } from "./storage.js";
-import { Project, addTodo } from "./projects.js";
+import { Project, addTodo, deleteTodo } from "./projects.js";
 import { User, addProjects } from "./users.js";
 import {
   Todo,
@@ -33,12 +33,18 @@ if (!user) {
   addTodo(myProject1, todo);
   store(user);
 }
-const currentProject = user.userProjectsArray[0];
+//const currentProject = user.userProjectsArray[0];
 const projectsArray = user.userProjectsArray;
 
 function addTodoToProject(project, ...todo) {
   addTodo(project, ...todo);
   store(user);
+}
+function deleteTodoFromProject(project, ...todo) {
+  deleteTodo(project, todo);
+
+  console.log(deleteTodo(project, todo));
+  //store(user)
 }
 function editTodoToProject(todo, desc, date, priority) {
   //implement priority here
@@ -63,11 +69,11 @@ function addNewUserProject(project) {
 
 export {
   addTodoToProject,
+  deleteTodoFromProject,
   editTodoToProject,
   addNewUserProject,
   isCompletedTodo,
   getTodoPriority,
   user,
-  currentProject,
   projectsArray,
 };

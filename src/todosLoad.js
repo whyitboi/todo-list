@@ -1,74 +1,104 @@
 import { format } from "date-fns";
-import { editTodoToProject, isCompletedTodo, getTodoPriority } from "./app.js";
+import { domLoad } from "./domLoad.js";
+import {
+  editTodoToProject,
+  deleteTodoFromProject,
+  isCompletedTodo,
+  getTodoPriority,
+} from "./app.js";
 
-function todosLoad(todoArr) {
+function checkCompletedTodos(todoArr) {
+  if (todoArr.every((todo) => todo.completed)) {
+    return true;
+  }
+}
+
+function todosLoad(project) {
+  const todoArr = project.todoLists;
   const article = document.querySelector(".article");
   const todoCardWrapper = document.createElement("div");
 
-  todoArr.forEach((todo) => {
-    if (!todo.completed) {
-      const todoCard = document.createElement("div");
-      const paraTitle = document.createElement("p");
-      const paraDesc = document.createElement("p");
-      const paradueDate = document.createElement("p");
-      const paraPriority = document.createElement("p");
-      const markComplete = document.createElement("input");
-      const editBtn = document.createElement("button");
+  if (checkCompletedTodos(todoArr)) {
+    alert("All todos in this project have been completed");
+    domLoad();
+  } else {
+    todoArr.forEach((todo) => {
+      if (!todo.completed) {
+        const todoCard = document.createElement("div");
+        const paraTitle = document.createElement("p");
+        const paraDesc = document.createElement("p");
+        const paradueDate = document.createElement("p");
+        const paraPriority = document.createElement("p");
+        const markComplete = document.createElement("input");
+        const deleteBtn = document.createElement("button");
+        const editBtn = document.createElement("button");
 
-      const titleLabel = document.createElement("label");
-      const descLabel = document.createElement("label");
-      const dueDateLabel = document.createElement("label");
-      const priorityLabel = document.createElement("label");
-      const completedLabel = document.createElement("label");
+        const titleLabel = document.createElement("label");
+        const descLabel = document.createElement("label");
+        const dueDateLabel = document.createElement("label");
+        const priorityLabel = document.createElement("label");
+        const completedLabel = document.createElement("label");
 
-      titleLabel.textContent = "Title";
-      descLabel.textContent = "Description";
-      dueDateLabel.textContent = "Due date";
-      priorityLabel.textContent = "Priority";
-      completedLabel.textContent = "Mark Complete";
-      editBtn.textContent = "Edit Todo";
+        titleLabel.textContent = "Title";
+        descLabel.textContent = "Description";
+        dueDateLabel.textContent = "Due date";
+        priorityLabel.textContent = "Priority";
+        completedLabel.textContent = "Mark Complete";
+        editBtn.textContent = "Edit Todo";
+        deleteBtn.textContent = "Delete Todo";
 
-      markComplete.type = "checkbox";
-      todoCard.setAttribute("class", "card");
+        markComplete.type = "checkbox";
+        todoCard.setAttribute("class", "card");
 
-      paraTitle.textContent = todo.title;
-      paraDesc.textContent = todo.description;
-      paraPriority.textContent = getTodoPriority(todo);
+        paraTitle.textContent = todo.title;
+        paraDesc.textContent = todo.description;
+        paraPriority.textContent = getTodoPriority(todo);
 
-      //console.log(getTodoPriority(todo));
+        //console.log(getTodoPriority(todo));
 
-      paradueDate.textContent = todo.dueDate;
+        paradueDate.textContent = todo.dueDate;
 
-      markComplete.addEventListener("change", () => {
-        if (markComplete.checked) {
-          isCompletedTodo(todo);
-          alert(`${todo.title}: has been marked as Complete`);
-          todosLoad(todoArr);
-        }
-      });
+        markComplete.addEventListener("change", () => {
+          if (markComplete.checked) {
+            isCompletedTodo(todo);
+            alert(`${todo.title}: has been marked as Complete`);
+            if (checkCompletedTodos(todoArr)) {
+              alert("All todos in this project have been completed");
+              domLoad();
+            } else {
+              todosLoad(todoArr);
+            }
+          }
+        });
 
-      editBtn.addEventListener("click", () => {
-        todoEditLoad(todo, todoArr);
-      });
+        editBtn.addEventListener("click", () => {
+          todoEditLoad(todo, todoArr);
+        });
+        deleteBtn.addEventListener("click", () => {
+          deleteTodoFromProject(project, todo);
+        });
 
-      titleLabel.append(paraTitle);
-      descLabel.append(paraDesc);
-      dueDateLabel.append(paradueDate);
-      priorityLabel.append(paraPriority);
-      completedLabel.append(markComplete);
+        titleLabel.append(paraTitle);
+        descLabel.append(paraDesc);
+        dueDateLabel.append(paradueDate);
+        priorityLabel.append(paraPriority);
+        completedLabel.append(markComplete);
 
-      todoCard.append(
-        titleLabel,
-        descLabel,
-        dueDateLabel,
-        priorityLabel,
-        completedLabel,
-        editBtn,
-      );
+        todoCard.append(
+          titleLabel,
+          descLabel,
+          dueDateLabel,
+          priorityLabel,
+          completedLabel,
+          editBtn,
+          deleteBtn,
+        );
 
-      todoCardWrapper.append(todoCard);
-    }
-  });
+        todoCardWrapper.append(todoCard);
+      }
+    });
+  }
+
   article.replaceChildren(todoCardWrapper);
 }
 

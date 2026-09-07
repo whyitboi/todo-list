@@ -15,8 +15,9 @@ function createCards(parent, array, nameOfClass) {
     card.append(paraName, paraDesc);
     card.addEventListener("click", () => {
       if (project.todoLists.length < 1) {
-        card.textContent = `There are no ToDo lists for: ${project.name}`;
-      } else todosLoad(project.todoLists);
+        //card.textContent =
+        alert(`There are no ToDo lists for: ${project.name}`);
+      } else todosLoad(project);
     });
 
     // card.setAttribute("id", project.projectId);
@@ -39,7 +40,7 @@ function domLoad() {
   newTodoBtn.textContent = "New Todo";
 
   newProjectBtn.addEventListener("click", () => {
-    createNewProjectLoad(projectsArray);
+    createNewProjectLoad();
   });
   newTodoBtn.addEventListener("click", () => {
     createNewTodoLoad(projectsArray);
