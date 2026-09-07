@@ -15,12 +15,14 @@ function createNewTodoLoad(projectsArray) {
   const projectLabel = document.createElement("label");
   const dateLabel = document.createElement("label");
   const descLabel = document.createElement("label");
+  const priorityLabel = document.createElement("label");
   const saveBtn = document.createElement("button");
   const cancelBtn = document.createElement("button");
 
+  let title = document.createElement("input");
   let dueDate = document.createElement("input");
   let desc = document.createElement("textarea");
-  let title = document.createElement("input");
+  let priority = document.createElement("input");
   let projectSelect = document.createElement("select");
 
   projectsArray.forEach((project) => {
@@ -35,6 +37,7 @@ function createNewTodoLoad(projectsArray) {
   titleLabel.textContent = "Title";
   projectLabel.textContent = "Project";
   dateLabel.textContent = "Due Date";
+  priorityLabel.textContent = "Priority";
   descLabel.textContent = "Description";
 
   inputRowOneDiv.setAttribute("class", "form-row");
@@ -44,6 +47,11 @@ function createNewTodoLoad(projectsArray) {
   Object.assign(buttonRow, {
     id: "button-row",
     class: "form-row",
+  });
+  Object.assign(priority, {
+    type: "number",
+    min: 1,
+    max: 3,
   });
   Object.assign(dueDate, {
     type: "date",
@@ -77,7 +85,14 @@ function createNewTodoLoad(projectsArray) {
   cancelBtn.textContent = "Cancel";
   saveBtn.textContent = "Save";
 
-  inputRowOneDiv.append(titleLabel, title, projectLabel, projectSelect);
+  inputRowOneDiv.append(
+    titleLabel,
+    title,
+    projectLabel,
+    projectSelect,
+    priorityLabel,
+    priority,
+  );
   inputRowTwoDiv.append(dateLabel, dueDate, descLabel, desc);
   buttonRow.append(cancelBtn, saveBtn);
   todoForm.append(inputRowOneDiv, inputRowTwoDiv, buttonRow);
@@ -99,14 +114,19 @@ function createNewTodoLoad(projectsArray) {
         (project) => project.projectId === projectSelect.value,
       );
 
-      const todo = new Todo(title.value, desc.value, dueDate.value, "medium");
+      const todo = new Todo(
+        title.value,
+        desc.value,
+        dueDate.value,
+        priority.value,
+      );
       addTodoToProject(selectedProject, todo);
       domLoad();
     }
   });
 }
 
-function createNewProjectLoad(projectsArray) {
+function createNewProjectLoad() {
   const article = document.querySelector(".article");
   const dialog = document.createElement("dialog");
   const todoForm = document.createElement("form");

@@ -10,16 +10,22 @@ class Todo {
     this.completed = false;
   }
 }
-function changePriority(todo, number) {
-  if (!Number(number)) {
+function getPriority(priorityNum) {
+  const priorities = {
+    1: "High",
+    2: "Normal",
+    3: "Low",
+  };
+
+  return priorities[priorityNum];
+}
+function changePriority(todo, priorityNum) {
+  let priority = Number(priorityNum);
+  console.log(priority);
+  if (!Number(priority)) {
     alert("Enter a number: 1: High; 2: Normal; 3:Low");
   } else {
-    const priority = {
-      1: "high",
-      2: "normal",
-      3: "low",
-    };
-    todo.priority = priority[number];
+    todo.priority = priority;
   }
 }
 
@@ -43,6 +49,6 @@ export {
   editTodoDes,
   editTodoDate,
   changePriority,
+  getPriority,
   isCompleted,
-  toggleCompleted,
 };
