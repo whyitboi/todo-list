@@ -8,8 +8,10 @@ import {
 } from "./app.js";
 
 function checkCompletedTodos(todoArr) {
-  if (todoArr.every((todo) => todo.completed)) {
-    return true;
+  if (todoArr.length > 0) {
+    if (todoArr.every((todo) => todo.completed)) {
+      return true;
+    }
   }
 }
 
@@ -76,6 +78,7 @@ function todosLoad(project) {
         });
         deleteBtn.addEventListener("click", () => {
           deleteTodoFromProject(project, todo);
+          if (todoArr.length !== -1) todosLoad(todoArr);
         });
 
         titleLabel.append(paraTitle);

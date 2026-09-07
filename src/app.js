@@ -42,9 +42,7 @@ function addTodoToProject(project, ...todo) {
 }
 function deleteTodoFromProject(project, ...todo) {
   deleteTodo(project, todo);
-
-  console.log(deleteTodo(project, todo));
-  //store(user)
+  store(user);
 }
 function editTodoToProject(todo, desc, date, priority) {
   //implement priority here

@@ -14,8 +14,9 @@ function addTodo(project, ...todo) {
 function deleteTodo(project, ...todos) {
   //straightforward with filter and includes
   project.todoLists = project.todoLists.filter((todo) => {
-    return !todos.includes(todo);
+    !todos.includes(todo);
   });
+  return project.todoLists;
 }
 function getProjectId(project) {
   return project.projectId;
