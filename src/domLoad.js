@@ -1,6 +1,6 @@
 import { projectsArray } from "./app.js";
 import { todosLoad } from "./todosLoad.js";
-import { createNewTodoLoad } from "./createNewDomLoad.js";
+import { createNewTodoLoad, createNewProjectLoad } from "./createNewDomLoad.js";
 
 function createCards(parent, array, nameOfClass) {
   //create the cards loop
@@ -39,7 +39,7 @@ function domLoad() {
   newTodoBtn.textContent = "New Todo";
 
   newProjectBtn.addEventListener("click", () => {
-    console.log("creates new project");
+    createNewProjectLoad(projectsArray);
   });
   newTodoBtn.addEventListener("click", () => {
     createNewTodoLoad(projectsArray);
@@ -54,7 +54,7 @@ function domLoad() {
   createCards(article, projectsArray, "card");
 
   document.body.prepend(header);
-  container.append(sidebar, dashboard, article);
+  container.replaceChildren(sidebar, dashboard, article);
 }
 
 export { domLoad };

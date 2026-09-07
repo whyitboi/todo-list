@@ -1,6 +1,5 @@
 import path from "node:path";
 import HtmlwebpackPlugin from "html-webpack-plugin";
-import { title } from "node:process";
 
 export default {
   entry: "./src/index.js",
@@ -12,7 +11,6 @@ export default {
   plugins: [
     new HtmlwebpackPlugin({
       template: "./src/template.html",
-      //   title: "Production",
     }),
   ],
   module: {

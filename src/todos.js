@@ -1,6 +1,4 @@
 //create Todos as a class
-//const todoArray = [];
-
 class Todo {
   constructor(title, description, dueDate, priority) {
     this.title = title;
