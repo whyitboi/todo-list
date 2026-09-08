@@ -25,6 +25,9 @@ function createNewTodoLoad(projectsArray) {
   let priority = document.createElement("input");
   let projectSelect = document.createElement("select");
 
+  projectLabel.setAttribute("for", "projectSelect");
+  projectSelect.setAttribute("id", "projectSelect");
+
   projectsArray.forEach((project) => {
     const option = document.createElement("option");
 
@@ -43,6 +46,8 @@ function createNewTodoLoad(projectsArray) {
   inputRowOneDiv.setAttribute("class", "form-row");
   inputRowTwoDiv.setAttribute("class", "form-row");
   dialog.setAttribute("id", "todoDialog");
+  descLabel.setAttribute("for", "description");
+  desc.setAttribute("id", "description");
 
   Object.assign(buttonRow, {
     id: "button-row",
@@ -75,10 +80,9 @@ function createNewTodoLoad(projectsArray) {
     method: "dialog",
   });
 
-  Object.assign(desc.style, {
-    width: "250px",
-    height: "150px",
-    resize: "none",
+  Object.assign(desc, {
+    id: "newTodoTextarea",
+    className: "formTextArea",
   });
 
   cancelBtn.textContent = "Cancel";
@@ -149,6 +153,8 @@ function createNewProjectLoad() {
   inputRowOneDiv.setAttribute("class", "form-row");
   inputRowTwoDiv.setAttribute("class", "form-row");
   dialog.setAttribute("id", "todoDialog");
+  descLabel.setAttribute("for", "description");
+  desc.setAttribute("id", "description");
 
   Object.assign(buttonRow, {
     id: "button-row",
@@ -172,10 +178,9 @@ function createNewProjectLoad() {
     method: "dialog",
   });
 
-  Object.assign(desc.style, {
-    width: "250px",
-    height: "150px",
-    resize: "none",
+  Object.assign(desc, {
+    id: "newProjectTextarea",
+    className: "formTextArea",
   });
 
   cancelBtn.textContent = "Cancel";

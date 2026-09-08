@@ -93,17 +93,25 @@ body {
   flex-direction: column;
   border-radius: 3px;
 }
+select {
+  width: 80%;
+  align-self: center;
+}
 /*textarea styling*/
 textarea {
   font-size: 14px;
-
   border: 1px solid #d6d9dc;
   border-radius: 3px;
-
   min-height: 200px;
   margin-bottom: 10px;
+  width: 250px;
+  height: 150px;
   padding: 7px;
   resize: none;
+}
+
+.formTextArea {
+  width: 80%;
 }
 .form-row {
   margin-bottom: 30px;
@@ -119,6 +127,9 @@ textarea {
 }
 label[for="description"] {
   align-self: flex-start;
+}
+label[for="projectSelect"] {
+  align-self: center;
 }
 /*input styling*/
 .form-row input {
@@ -158,32 +169,38 @@ button {
 }
 .article {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) 1fr;
-  flex-direction: column;
-  /* flex-wrap: wrap; */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
   grid-column: 2;
   padding: 1em;
 }
 
 .card {
-  grid-column: 1 / span 2;
+  display: grid;
+  height: 200px;
+  overflow: hidden;
+  padding: 1em;
   border-radius: 4px;
   border-collapse: collapse;
   border: 2px solid black;
-  /* min-width: 100px;
-  max-width: 200px;
-  min-height: 100px;
-  max-height: 200px; */
-  /* grid-template-columns: repeat(2, 1fr); */
 }
 .cardWrapper {
   display: grid;
-  /* row-gap: 10px; */
+  gap: 10px;
   grid-template-columns: repeat(2, 1fr);
   grid-column: 1 / span 2;
 }
+.buttonWrapper {
+  grid-column: 1/-1;
+}
 .card-details {
-  position: absolute;
+  padding: 1em;
+  height: fit-content;
+  width: max-content;
+  overflow: hidden;
+  border-radius: 4px;
+  border-collapse: collapse;
+  border: 2px solid black;
 }
 
 /* header {

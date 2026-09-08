@@ -45,7 +45,7 @@ function todosLoad(project) {
         paradueDate.textContent = todo.dueDate;
 
         detailsBtn.addEventListener("click", () => {
-          todoDetails(project);
+          todoDetails(todo, project);
         });
 
         titleLabel.append(paraTitle);
@@ -60,7 +60,7 @@ function todosLoad(project) {
 
   article.replaceChildren(todoCardWrapper);
 }
-function todoDetails(project) {
+function todoDetails(todo, project) {
   //this function will show the details and edit button
 
   const article = document.querySelector(".article");
@@ -71,83 +71,83 @@ function todoDetails(project) {
     alert("All todos in this project have been completed");
     domLoad();
   } else {
-    project.todoLists.forEach((todo) => {
-      if (!todo.completed) {
-        const todoCard = document.createElement("div");
-        const paraTitle = document.createElement("p");
-        const paraDesc = document.createElement("p");
-        const paradueDate = document.createElement("p");
-        const paraPriority = document.createElement("p");
-        const markComplete = document.createElement("input");
-        const deleteBtn = document.createElement("button");
-        const editBtn = document.createElement("button");
+    if (!todo.completed) {
+      const todoCard = document.createElement("div");
+      const todoButtonWrapper = document.createElement("div");
 
-        const titleLabel = document.createElement("label");
-        const descLabel = document.createElement("label");
-        const dueDateLabel = document.createElement("label");
-        const priorityLabel = document.createElement("label");
-        const completedLabel = document.createElement("label");
+      const paraTitle = document.createElement("p");
+      const paraDesc = document.createElement("p");
+      const paradueDate = document.createElement("p");
+      const paraPriority = document.createElement("p");
+      const markComplete = document.createElement("input");
+      const deleteBtn = document.createElement("button");
+      const editBtn = document.createElement("button");
 
-        titleLabel.textContent = "Title";
-        descLabel.textContent = "Description";
-        dueDateLabel.textContent = "Due date";
-        priorityLabel.textContent = "Priority";
-        completedLabel.textContent = "Mark Complete";
-        editBtn.textContent = "Edit Todo";
-        deleteBtn.textContent = "Delete Todo";
+      const titleLabel = document.createElement("label");
+      const descLabel = document.createElement("label");
+      const dueDateLabel = document.createElement("label");
+      const priorityLabel = document.createElement("label");
+      const completedLabel = document.createElement("label");
 
-        markComplete.type = "checkbox";
-        todoCard.setAttribute("class", "card-details");
+      titleLabel.textContent = "Title";
+      descLabel.textContent = "Description";
+      dueDateLabel.textContent = "Due date";
+      priorityLabel.textContent = "Priority";
+      completedLabel.textContent = "Mark Complete";
+      editBtn.textContent = "Edit Todo";
+      deleteBtn.textContent = "Delete Todo";
 
-        paraTitle.textContent = todo.title;
-        paraDesc.textContent = todo.description;
-        paraPriority.textContent = getTodoPriority(todo);
-        paradueDate.textContent = todo.dueDate;
+      markComplete.type = "checkbox";
+      todoCard.setAttribute("class", "card-details");
 
-        markComplete.addEventListener("change", () => {
-          if (markComplete.checked) {
-            isCompletedTodo(todo);
-            alert(`${todo.title}: has been marked as Complete`);
-            if (checkCompletedTodos(project.todoLists)) {
-              alert("All todos in this project have been completed");
-              domLoad();
-            } else {
-              todosLoad(project);
-            }
-          }
-        });
+      paraTitle.textContent = todo.title;
+      paraDesc.textContent = todo.description;
+      paraPriority.textContent = getTodoPriority(todo);
+      paradueDate.textContent = todo.dueDate;
 
-        editBtn.addEventListener("click", () => {
-          todoEditLoad(todo, project);
-        });
-        deleteBtn.addEventListener("click", () => {
-          deleteTodoFromProject(project, todo);
-          if (project.todoLists.length > 0) todosLoad(project);
-          else {
-            alert("All todos have been deleted or completed");
+      markComplete.addEventListener("change", () => {
+        if (markComplete.checked) {
+          isCompletedTodo(todo);
+          alert(`${todo.title}: has been marked as Complete`);
+          if (checkCompletedTodos(project.todoLists)) {
+            alert("All todos in this project have been completed");
             domLoad();
+          } else {
+            todosLoad(project);
           }
-        });
+        }
+      });
 
-        titleLabel.append(paraTitle);
-        descLabel.append(paraDesc);
-        dueDateLabel.append(paradueDate);
-        priorityLabel.append(paraPriority);
-        completedLabel.append(markComplete);
+      editBtn.addEventListener("click", () => {
+        todoEditLoad(todo, project);
+      });
+      deleteBtn.addEventListener("click", () => {
+        deleteTodoFromProject(project, todo);
+        if (project.todoLists.length > 0) todosLoad(project);
+        else {
+          alert("All todos have been deleted or completed");
+          domLoad();
+        }
+      });
 
-        todoCard.append(
-          titleLabel,
-          descLabel,
-          dueDateLabel,
-          priorityLabel,
-          completedLabel,
-          editBtn,
-          deleteBtn,
-        );
+      titleLabel.append(paraTitle);
+      descLabel.append(paraDesc);
+      dueDateLabel.append(paradueDate);
+      priorityLabel.append(paraPriority);
+      completedLabel.append(markComplete);
+      todoButtonWrapper.append(editBtn, deleteBtn);
 
-        todoCardWrapper.append(todoCard);
-      }
-    });
+      todoCard.append(
+        titleLabel,
+        descLabel,
+        dueDateLabel,
+        priorityLabel,
+        completedLabel,
+      );
+      todoCard.appendChild(todoButtonWrapper);
+
+      todoCardWrapper.append(todoCard);
+    }
   }
 
   article.replaceChildren(todoCardWrapper);

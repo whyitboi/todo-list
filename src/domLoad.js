@@ -36,6 +36,7 @@ function domLoad() {
   const listItem = document.createElement("li");
   const homeLink = document.createElement("a");
   const article = document.createElement("div");
+  const buttonWrapper = document.createElement("div");
   const newProjectBtn = document.createElement("button");
   const newTodoBtn = document.createElement("button");
 
@@ -68,8 +69,10 @@ function domLoad() {
   dashboard.setAttribute("class", "dashboard");
   header.setAttribute("class", "header");
   article.setAttribute("class", "article");
+  buttonWrapper.setAttribute("class", "buttonWrapper");
 
-  article.append(newProjectBtn, newTodoBtn);
+  buttonWrapper.append(newProjectBtn, newTodoBtn);
+  article.append(buttonWrapper);
   createCards(article, projectsArray, "card");
 
   container.replaceChildren(sidebar, dashboard, article);
