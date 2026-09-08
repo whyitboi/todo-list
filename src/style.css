@@ -39,7 +39,7 @@
     url("./fonts/florlrg_-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
-}
+} */
 * {
   padding: 0;
   margin: 0;
@@ -48,47 +48,149 @@
   --_fontColor: var(--fontColor, inherit);
   --_padding: var(--padding, inherit);
   --_fontSize: var(--fontSize, inherit);
-} */
+}
 /*variables*/
-/* :root {
+:root {
   --_fontFamily: var(--fontFamily, "doods");
   --_fontSize: var(--fontSize, var(clamp(1em, 0.5em, +1.5vw, 2rem), 24px));
-  --_fontColor: var(--fontColor, white);
+  --_fontColor: var(--fontColor, black);
   --_padding: var(--padding, 30px);
-} */
-
-/* body {
-  display: grid;
-  height: 100vh;
-  grid-template-rows: auto repeat(2, 1fr);
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    /for black overlay to improve readbility* url("./background-img1.jpg");
-  background-size: cover;
-  position: relative;
-} */
-.card {
-  border-collapse: collapse;
-  border: 2px solid black;
-  padding: 50px;
 }
 
-/* #content {
-  --fontSize: 1.2em;
-  line-height: 1.5em;
-  grid-column: 1/4;
-  grid-row: 2/4;
+body {
+  /* display: grid; */
+  height: 100vh;
+  /* grid-template-rows: auto repeat(2, 1fr); */
+  /* background-image:
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    /*for black overlay to improve readbility/ url("./background-img1.jpg");
+  background-size: cover;
+  position: relative; */
+}
+.card,
+.cardWrapper {
+  /* flex-direction: column; */
+  border-collapse: collapse;
+  border: 2px solid black;
+
+  /* padding: 50px; */
+}
+.card {
+  grid-template-rows: auto;
+  grid-column: 1 / span 2;
+  /* grid-template-columns: repeat(2, 1fr); */
+}
+.cardWrapper {
   display: grid;
-  grid-template-rows: auto repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  grid-column: 1 / span 2;
+}
+.card-details {
+  position: absolute;
+}
+#todoDialog[open] {
+  margin: auto;
+  position: fixed;
+  padding: 2em;
+}
+.edit-todo,
+.new-project,
+.new-todo {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  /* background-color: pink; */
+  /* var(--bckgrnd-color); */
+  /* border: var(--border);
+  var(--border-radius); */
+  /* width: 80%;
+  padding: 50px;
+  margin: 0 0 40px 0; */
+}
+/*textarea styling*/
+textarea {
+  font-size: 14px;
+
+  border: 1px solid #d6d9dc;
+  border-radius: 3px;
+
+  min-height: 200px;
+  margin-bottom: 10px;
+  padding: 7px;
+  resize: none;
+}
+.form-row {
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: 100px 250px;
+  align-items: center;
+  /* flex-direction: column;
+  flex-wrap: wrap; */
+}
+.form-row label,
+.form-row legend {
+  margin-bottom: 15px;
+}
+label[for="description"] {
+  align-self: flex-start;
+}
+/*input styling*/
+.form-row input {
+  /* --bckgrnd-color: #ffffff;
+  background-color: var(--bckgrnd-color);
+  border: var(--border); */
+  border-radius: 3px;
+  width: 80%;
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+#button-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+button {
+  width: fit-content;
+}
+
+#content {
+  /* --fontSize: 1.2em; */
+  line-height: 1.5em;
+  /*grid-column: 1/4;
+  grid-row: 2/4; */
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-template-rows: 50px auto 50px;
   color: var(--_fontColor);
   font-size: var(--_fontSize);
 }
-header {
+.article {
   display: flex;
-  grid-column: 1 / 4;
+  flex-direction: column;
+  grid-column: 2;
+}
+.sidebar {
+  display: grid;
+  grid-column: 1/2;
+  grid-row: 1 / 4;
+}
+.dashboard {
+  grid-column: 2;
+  grid-row: 1 / span 1;
+}
+.nav {
+  grid-row: 2/3;
+}
+
+/* header {
+  display: flex;
+  grid-column: 2;
   justify-content: space-between;
   max-height: fit-content;
-}
+} */
+
+/* 
 h2 {
   font-family: "doods";
   padding: var(--_padding);
@@ -122,11 +224,4 @@ button {
   text-decoration: none;
   color: unset;
 }
-.photo-credit {
-  --fontSize: 0.75em;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  color: var(--_fontColor);
-  font-size: var(--_fontSize);
-} */
+ */

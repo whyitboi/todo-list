@@ -46,7 +46,6 @@ function createNewTodoLoad(projectsArray) {
 
   Object.assign(buttonRow, {
     id: "button-row",
-    class: "form-row",
   });
   Object.assign(priority, {
     type: "number",
@@ -60,24 +59,24 @@ function createNewTodoLoad(projectsArray) {
 
   Object.assign(cancelBtn, {
     type: "button",
-    class: "submit",
+    className: "submit",
     value: "cancel",
   });
 
   Object.assign(saveBtn, {
     type: "button",
-    class: "submit",
+    className: "submit",
     value: "save",
   });
 
   Object.assign(todoForm, {
-    class: "new-todo",
+    className: "new-todo",
     action: "#",
     method: "dialog",
   });
 
   Object.assign(desc.style, {
-    width: "300px",
+    width: "250px",
     height: "150px",
     resize: "none",
   });
@@ -121,7 +120,10 @@ function createNewTodoLoad(projectsArray) {
         priority.value,
       );
       addTodoToProject(selectedProject, todo);
+      dialog.remove();
       domLoad();
+    } else {
+      dialog.remove();
     }
   });
 }
@@ -150,29 +152,28 @@ function createNewProjectLoad() {
 
   Object.assign(buttonRow, {
     id: "button-row",
-    class: "form-row",
   });
 
   Object.assign(cancelBtn, {
     type: "button",
-    class: "submit",
+    className: "submit",
     value: "cancel",
   });
 
   Object.assign(saveBtn, {
     type: "button",
-    class: "submit",
+    className: "submit",
     value: "save",
   });
 
   Object.assign(todoForm, {
-    class: "new-project",
+    className: "new-project",
     action: "#",
     method: "dialog",
   });
 
   Object.assign(desc.style, {
-    width: "300px",
+    width: "250px",
     height: "150px",
     resize: "none",
   });
@@ -200,7 +201,10 @@ function createNewProjectLoad() {
     if (dialog.returnValue === "save") {
       const newProject = new Project(title.value, desc.value);
       addNewUserProject(newProject);
+      dialog.remove();
       domLoad();
+    } else {
+      dialog.remove();
     }
   });
 }

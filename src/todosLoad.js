@@ -20,6 +20,7 @@ function todosLoad(project) {
 
   const article = document.querySelector(".article");
   const todoCardWrapper = document.createElement("div");
+  todoCardWrapper.setAttribute("class", "cardWrapper");
 
   if (checkCompletedTodos(project.todoLists)) {
     alert("All todos in this project have been completed");
@@ -64,6 +65,7 @@ function todoDetails(project) {
 
   const article = document.querySelector(".article");
   const todoCardWrapper = document.createElement("div");
+  todoCardWrapper.setAttribute("class", "cardWrapper");
 
   if (checkCompletedTodos(project.todoLists)) {
     alert("All todos in this project have been completed");
@@ -95,14 +97,11 @@ function todoDetails(project) {
         deleteBtn.textContent = "Delete Todo";
 
         markComplete.type = "checkbox";
-        todoCard.setAttribute("class", "card");
+        todoCard.setAttribute("class", "card-details");
 
         paraTitle.textContent = todo.title;
         paraDesc.textContent = todo.description;
         paraPriority.textContent = getTodoPriority(todo);
-
-        //console.log(getTodoPriority(todo));
-
         paradueDate.textContent = todo.dueDate;
 
         markComplete.addEventListener("change", () => {
@@ -181,10 +180,11 @@ function todoEditLoad(todo, project) {
   inputRowOneDiv.setAttribute("class", "form-row");
   inputRowTwoDiv.setAttribute("class", "form-row");
   dialog.setAttribute("id", "todoDialog");
+  descLabel.setAttribute("for", "description");
+  desc.setAttribute("id", "description");
 
   Object.assign(buttonRow, {
     id: "button-row",
-    class: "form-row",
   });
   Object.assign(priority, {
     type: "number",
@@ -205,18 +205,18 @@ function todoEditLoad(todo, project) {
 
   Object.assign(saveBtn, {
     type: "button",
-    class: "submit",
+    className: "submit",
     value: "save",
   });
 
   Object.assign(todoForm, {
-    class: "edit-todo",
+    className: "edit-todo",
     action: "#",
     method: "dialog",
   });
 
   Object.assign(desc.style, {
-    width: "300px",
+    width: "200px",
     height: "150px",
     resize: "none",
   });
@@ -248,7 +248,10 @@ function todoEditLoad(todo, project) {
   dialog.addEventListener("close", () => {
     if (dialog.returnValue === "save") {
       editTodoToProject(todo, desc.value, dueDate.value, priority.value);
+      dialog.remove();
       todosLoad(project);
+    } else {
+      dialog.remove();
     }
   });
 }

@@ -29,10 +29,13 @@ function domLoad() {
   const container = document.getElementById("content");
 
   const sidebar = document.createElement("div");
+  const logo = document.createElement("div");
   const dashboard = document.createElement("div");
   const header = document.createElement("header");
-  const article = document.createElement("div");
   const linkList = document.createElement("ul");
+  const listItem = document.createElement("li");
+  const homeLink = document.createElement("a");
+  const article = document.createElement("div");
   const newProjectBtn = document.createElement("button");
   const newTodoBtn = document.createElement("button");
 
@@ -46,7 +49,22 @@ function domLoad() {
     createNewTodoLoad(projectsArray);
   });
 
+  homeLink.textContent = "Home";
+  homeLink.addEventListener("click", () => {
+    domLoad();
+  });
+
+  logo.textContent = "TwoDoo";
+
+  listItem.append(homeLink);
+  linkList.appendChild(listItem);
+  sidebar.append(logo, linkList);
+
+  //remove after CSS styling
+  dashboard.textContent = "Dashboard";
+
   sidebar.setAttribute("class", "sidebar");
+  linkList.setAttribute("class", "nav");
   dashboard.setAttribute("class", "dashboard");
   header.setAttribute("class", "header");
   article.setAttribute("class", "article");
@@ -54,8 +72,8 @@ function domLoad() {
   article.append(newProjectBtn, newTodoBtn);
   createCards(article, projectsArray, "card");
 
-  document.body.prepend(header);
   container.replaceChildren(sidebar, dashboard, article);
+  document.body.replaceChildren(header, container);
 }
 
 export { domLoad };
