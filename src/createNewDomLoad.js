@@ -25,8 +25,9 @@ function createNewTodoLoad(projectsArray) {
   let priority = document.createElement("input");
   let projectSelect = document.createElement("select");
 
-  projectLabel.setAttribute("for", "projectSelect");
-  projectSelect.setAttribute("id", "projectSelect");
+  const defOption = document.createElement("option");
+  defOption.textContent = "Select a Project";
+  projectSelect.appendChild(defOption);
 
   projectsArray.forEach((project) => {
     const option = document.createElement("option");

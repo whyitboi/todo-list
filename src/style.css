@@ -95,7 +95,7 @@ body {
 }
 select {
   width: 80%;
-  align-self: center;
+  margin-bottom: 15px;
 }
 /*textarea styling*/
 textarea {
