@@ -16,15 +16,60 @@ function checkCompletedTodos(todoArr) {
 }
 
 function todosLoad(project) {
-  const todoArr = project.todoLists;
+  //this function loads just title and dueDate
+
   const article = document.querySelector(".article");
   const todoCardWrapper = document.createElement("div");
 
-  if (checkCompletedTodos(todoArr)) {
+  if (checkCompletedTodos(project.todoLists)) {
     alert("All todos in this project have been completed");
     domLoad();
   } else {
-    todoArr.forEach((todo) => {
+    project.todoLists.forEach((todo) => {
+      if (!todo.completed) {
+        const todoCard = document.createElement("div");
+        const paraTitle = document.createElement("p");
+        const paradueDate = document.createElement("p");
+        const detailsBtn = document.createElement("button");
+        const titleLabel = document.createElement("label");
+        const dueDateLabel = document.createElement("label");
+
+        titleLabel.textContent = "Title";
+        dueDateLabel.textContent = "Due date";
+        detailsBtn.textContent = "See Details";
+        todoCard.setAttribute("class", "card");
+
+        paraTitle.textContent = todo.title;
+
+        paradueDate.textContent = todo.dueDate;
+
+        detailsBtn.addEventListener("click", () => {
+          todoDetails(project);
+        });
+
+        titleLabel.append(paraTitle);
+        dueDateLabel.append(paradueDate);
+
+        todoCard.append(titleLabel, dueDateLabel, detailsBtn);
+
+        todoCardWrapper.append(todoCard);
+      }
+    });
+  }
+
+  article.replaceChildren(todoCardWrapper);
+}
+function todoDetails(project) {
+  //this function will show the details and edit button
+
+  const article = document.querySelector(".article");
+  const todoCardWrapper = document.createElement("div");
+
+  if (checkCompletedTodos(project.todoLists)) {
+    alert("All todos in this project have been completed");
+    domLoad();
+  } else {
+    project.todoLists.forEach((todo) => {
       if (!todo.completed) {
         const todoCard = document.createElement("div");
         const paraTitle = document.createElement("p");
@@ -64,7 +109,7 @@ function todosLoad(project) {
           if (markComplete.checked) {
             isCompletedTodo(todo);
             alert(`${todo.title}: has been marked as Complete`);
-            if (checkCompletedTodos(todoArr)) {
+            if (checkCompletedTodos(project.todoLists)) {
               alert("All todos in this project have been completed");
               domLoad();
             } else {
@@ -74,7 +119,7 @@ function todosLoad(project) {
         });
 
         editBtn.addEventListener("click", () => {
-          todoEditLoad(todo, todoArr);
+          todoEditLoad(todo, project);
         });
         deleteBtn.addEventListener("click", () => {
           deleteTodoFromProject(project, todo);
@@ -109,7 +154,7 @@ function todosLoad(project) {
   article.replaceChildren(todoCardWrapper);
 }
 
-function todoEditLoad(todo, todoArr) {
+function todoEditLoad(todo, project) {
   const article = document.querySelector(".article");
   const dialog = document.createElement("dialog");
   const todoForm = document.createElement("form");
@@ -203,7 +248,7 @@ function todoEditLoad(todo, todoArr) {
   dialog.addEventListener("close", () => {
     if (dialog.returnValue === "save") {
       editTodoToProject(todo, desc.value, dueDate.value, priority.value);
-      todosLoad(todoArr);
+      todosLoad(project);
     }
   });
 }
