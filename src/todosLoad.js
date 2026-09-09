@@ -314,6 +314,12 @@ function todoEditLoad(todo, project) {
   const buttons = dialog.querySelectorAll("button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
+      if (dialog.returnValue === "save") {
+        if (priority.value < 1 || priority.value > 3) {
+          alert("Select 1 for high, 2 for normal or 3 for low in Priority");
+          return;
+        }
+      }
       dialog.close(button.value);
     });
   });
