@@ -21,7 +21,6 @@ function getPriority(priorityNum) {
 }
 function changePriority(todo, priorityNum) {
   let priority = Number(priorityNum);
-  console.log(priority);
   if (!Number(priority)) {
     alert("Enter a number: 1: High; 2: Normal; 3:Low");
   } else {
