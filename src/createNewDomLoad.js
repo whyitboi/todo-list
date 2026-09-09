@@ -27,6 +27,9 @@ function createNewTodoLoad(projectsArray) {
 
   const defOption = document.createElement("option");
   defOption.textContent = "Select a Project";
+  defOption.disabled = true;
+  defOption.selected = true;
+
   projectSelect.appendChild(defOption);
 
   projectsArray.forEach((project) => {
@@ -61,6 +64,7 @@ function createNewTodoLoad(projectsArray) {
   Object.assign(dueDate, {
     type: "date",
     min: format(new Date(), "yyyy-MM-dd"),
+    required: true,
   });
 
   Object.assign(cancelBtn, {
@@ -84,7 +88,12 @@ function createNewTodoLoad(projectsArray) {
   Object.assign(desc, {
     id: "newTodoTextarea",
     className: "formTextArea",
+    required: true,
   });
+  title.required = true;
+  desc.required = true;
+  dueDate.required = true;
+  projectSelect.required = true;
 
   cancelBtn.textContent = "Cancel";
   saveBtn.textContent = "Save";
@@ -113,22 +122,32 @@ function createNewTodoLoad(projectsArray) {
   });
 
   dialog.addEventListener("close", () => {
-    if (dialog.returnValue === "save") {
-      const selectedProject = projectsArray.find(
-        (project) => project.projectId === projectSelect.value,
-      );
+    if (title.value && desc.value && dueDate.value && projectSelect.value) {
+      if (priority.value < 1 || priority.value > 3) {
+        alert("Select 1 for high, 2 for normal or 3 for low in Priority");
+        return;
+      } else {
+        if (dialog.returnValue === "save") {
+          const selectedProject = projectsArray.find(
+            (project) => project.projectId === projectSelect.value,
+          );
 
-      const todo = new Todo(
-        title.value,
-        desc.value,
-        dueDate.value,
-        priority.value,
-      );
-      addTodoToProject(selectedProject, todo);
-      dialog.remove();
-      domLoad();
+          const todo = new Todo(
+            title.value,
+            desc.value,
+            dueDate.value,
+            priority.value,
+          );
+          addTodoToProject(selectedProject, todo);
+          dialog.remove();
+          domLoad();
+        } else {
+          dialog.remove();
+        }
+      }
     } else {
-      dialog.remove();
+      alert("Please complete all required fields");
+      return;
     }
   });
 }
@@ -183,6 +202,8 @@ function createNewProjectLoad() {
     id: "newProjectTextarea",
     className: "formTextArea",
   });
+  title.required = true;
+  desc.required = true;
 
   cancelBtn.textContent = "Cancel";
   saveBtn.textContent = "Save";
@@ -196,7 +217,7 @@ function createNewProjectLoad() {
 
   dialog.showModal();
 
-  const buttons = document.querySelectorAll("button");
+  const buttons = dialog.querySelectorAll("button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       dialog.close(button.value);
@@ -204,13 +225,17 @@ function createNewProjectLoad() {
   });
 
   dialog.addEventListener("close", () => {
-    if (dialog.returnValue === "save") {
-      const newProject = new Project(title.value, desc.value);
-      addNewUserProject(newProject);
-      dialog.remove();
-      domLoad();
+    if (title.value && desc.value) {
+      if (dialog.returnValue === "save") {
+        const newProject = new Project(title.value, desc.value);
+        addNewUserProject(newProject);
+        dialog.remove();
+        domLoad();
+      } else {
+        dialog.remove();
+      }
     } else {
-      dialog.remove();
+      alert("Please enter all required values");
     }
   });
 }

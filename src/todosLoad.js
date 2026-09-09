@@ -311,7 +311,7 @@ function todoEditLoad(todo, project) {
 
   dialog.showModal();
 
-  const buttons = document.querySelectorAll("button");
+  const buttons = dialog.querySelectorAll("button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       dialog.close(button.value);
