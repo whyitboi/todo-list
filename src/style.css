@@ -89,9 +89,9 @@ body {
 #todoDialog[open] {
   margin: auto;
   position: fixed;
-  padding: var(--padding);
+  padding: var(--_padding);
   --backgroundColor: #f1f5f9;
-  background-color: var(--backgroundColor);
+  background-color: var(--_backgroundColor);
 }
 .edit-todo,
 .new-project,

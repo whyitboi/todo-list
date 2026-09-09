@@ -114,7 +114,7 @@ function createNewTodoLoad(projectsArray) {
 
   dialog.showModal();
 
-  const buttons = document.querySelectorAll("button");
+  const buttons = dialog.querySelectorAll("button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       if (button.value === "save") {
@@ -222,22 +222,22 @@ function createNewProjectLoad() {
   const buttons = dialog.querySelectorAll("button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
+      if (title.value && desc.value) {
+      } else {
+        alert("Please enter all required values");
+      }
       dialog.close(button.value);
     });
   });
 
   dialog.addEventListener("close", () => {
-    if (title.value && desc.value) {
-      if (dialog.returnValue === "save") {
-        const newProject = new Project(title.value, desc.value);
-        addNewUserProject(newProject);
-        dialog.remove();
-        domLoad();
-      } else {
-        dialog.remove();
-      }
+    if (dialog.returnValue === "save") {
+      const newProject = new Project(title.value, desc.value);
+      addNewUserProject(newProject);
+      dialog.remove();
+      domLoad();
     } else {
-      alert("Please enter all required values");
+      dialog.remove();
     }
   });
 }
