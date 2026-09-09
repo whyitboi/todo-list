@@ -222,9 +222,12 @@ function createNewProjectLoad() {
   const buttons = dialog.querySelectorAll("button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      if (title.value && desc.value) {
-      } else {
-        alert("Please enter all required values");
+      if (button.value === "save") {
+        if (title.value && desc.value) {
+        } else {
+          alert("Please enter all required values");
+          return;
+        }
       }
       dialog.close(button.value);
     });

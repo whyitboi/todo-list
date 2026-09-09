@@ -78,9 +78,7 @@ function domLoad() {
   linkList.appendChild(listItem);
   sidebar.append(logo, linkList);
 
-  //remove after CSS styling
-  dashboard.textContent = "Dashboard";
-
+  logo.setAttribute("class", "logo");
   sidebar.setAttribute("class", "sidebar");
   linkList.setAttribute("class", "nav");
   dashboard.setAttribute("class", "dashboard");
