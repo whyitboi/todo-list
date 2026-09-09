@@ -117,37 +117,39 @@ function createNewTodoLoad(projectsArray) {
   const buttons = document.querySelectorAll("button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
+      if (button.value === "save") {
+        if (title.value && desc.value && dueDate.value && projectSelect.value) {
+          if (priority.value < 1 || priority.value > 3) {
+            alert("Select 1 for high, 2 for normal or 3 for low in Priority");
+            return;
+          }
+        } else {
+          alert("Please complete all required fields");
+          return;
+        }
+      }
+
       dialog.close(button.value);
     });
   });
 
   dialog.addEventListener("close", () => {
-    if (title.value && desc.value && dueDate.value && projectSelect.value) {
-      if (priority.value < 1 || priority.value > 3) {
-        alert("Select 1 for high, 2 for normal or 3 for low in Priority");
-        return;
-      } else {
-        if (dialog.returnValue === "save") {
-          const selectedProject = projectsArray.find(
-            (project) => project.projectId === projectSelect.value,
-          );
+    if (dialog.returnValue === "save") {
+      const selectedProject = projectsArray.find(
+        (project) => project.projectId === projectSelect.value,
+      );
 
-          const todo = new Todo(
-            title.value,
-            desc.value,
-            dueDate.value,
-            priority.value,
-          );
-          addTodoToProject(selectedProject, todo);
-          dialog.remove();
-          domLoad();
-        } else {
-          dialog.remove();
-        }
-      }
+      const todo = new Todo(
+        title.value,
+        desc.value,
+        dueDate.value,
+        priority.value,
+      );
+      addTodoToProject(selectedProject, todo);
+      dialog.remove();
+      domLoad();
     } else {
-      alert("Please complete all required fields");
-      return;
+      dialog.remove();
     }
   });
 }
