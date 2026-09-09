@@ -44,6 +44,7 @@
   padding: 0;
   margin: 0;
   border: none;
+  box-sizing: border-box;
   --_fontFamily: var(--fontFamily, , inherit);
   --_fontColor: var(--fontColor, inherit);
   --_padding: var(--padding, inherit);
@@ -78,7 +79,7 @@ body {
   margin: auto;
   position: fixed;
   padding: 1em;
-  background-color: #868686;
+  background-color: #f1f5f9;
 }
 .edit-todo,
 .new-project,
@@ -86,7 +87,7 @@ body {
   display: flex;
   flex-direction: column;
   border-radius: 3px;
-  background-color: #868686;
+  background-color: #f1f5f9;
 }
 /* select {
   width: 80%;
@@ -109,6 +110,11 @@ textarea {
 select {
   width: 80%;
 }
+
+select {
+  background-color: white;
+  height: 100%;
+}
 .form-row {
   margin-bottom: 30px;
   display: grid;
@@ -125,12 +131,15 @@ select {
 label[for="description"] {
   align-self: flex-start;
 }
-
+label {
+  font-weight: 800;
+}
 /*input styling*/
 .form-row input {
   /* --bckgrnd-color: #ffffff;
   background-color: var(--bckgrnd-color);
   border: var(--border); */
+  border: 1px solid #d6d9dc;
   border-radius: 3px;
   width: 80%;
   padding: 10px;
@@ -172,12 +181,20 @@ button {
 
 .card {
   display: grid;
+  /* grid-template-columns: 1fr 1fr;
+  grid-template-rows: fit-content; */
   height: 300px;
   overflow: hidden;
   padding: 1em;
   border-radius: 4px;
   border-collapse: collapse;
   border: 2px solid black;
+}
+.todo-info,
+.project-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
 }
 .cardWrapper {
   display: grid;
@@ -199,6 +216,18 @@ button {
   border-radius: 4px;
   border-collapse: collapse;
   border: 2px solid black;
+}
+#high-priority {
+  background-color: #fecaca;
+}
+#normal-priority {
+  background-color: #fef3c7;
+}
+#low-priority {
+  background-color: #dcfce7;
+}
+input[type="checkbox"] {
+  margin-left: 10px;
 }
 
 /* header {

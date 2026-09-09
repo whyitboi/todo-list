@@ -42,6 +42,10 @@ function todosLoad(project) {
     project.todoLists.forEach((todo) => {
       if (!todo.completed) {
         const todoCard = document.createElement("div");
+
+        const titleGroup = document.createElement("div");
+        const deuDateGroup = document.createElement("div");
+
         const paraTitle = document.createElement("p");
         const paradueDate = document.createElement("p");
         const detailsBtn = document.createElement("button");
@@ -51,20 +55,41 @@ function todosLoad(project) {
         titleLabel.textContent = "Title";
         dueDateLabel.textContent = "Due date";
         detailsBtn.textContent = "See Details";
+
         todoCard.setAttribute("class", "card");
+        titleGroup.setAttribute("class", "todo-info");
+        deuDateGroup.setAttribute("class", "todo-info");
+
+        //set the id of the card according to priority
+        if (getTodoPriority(todo) === "High") {
+          todoCard.setAttribute("id", "high-priority");
+        } else if (getTodoPriority(todo) === "Normal") {
+          todoCard.setAttribute("id", "normal-priority");
+        } else if (getTodoPriority(todo) === "Low") {
+          todoCard.setAttribute("id", "low-priority");
+        }
 
         paraTitle.textContent = todo.title;
-
         paradueDate.textContent = todo.dueDate;
 
         detailsBtn.addEventListener("click", () => {
           todoDetails(todo, project);
         });
 
-        titleLabel.append(paraTitle);
-        dueDateLabel.append(paradueDate);
+        titleGroup.append(titleLabel, paraTitle);
+        deuDateGroup.append(dueDateLabel, paradueDate);
 
-        todoCard.append(titleLabel, dueDateLabel, detailsBtn);
+        // titleLabel.append(paraTitle);
+        // dueDateLabel.append(paradueDate);
+        todoCard.append(titleGroup, deuDateGroup, detailsBtn);
+
+        // todoCard.append(
+        //   titleLabel,
+        //   paraTitle,
+        //   dueDateLabel,
+        //   paradueDate,
+        //   detailsBtn,
+        // );
 
         todoCardWrapper.append(todoCard);
       }
@@ -115,6 +140,18 @@ function todoDetails(todo, project) {
       const priorityLabel = document.createElement("label");
       const completedLabel = document.createElement("label");
 
+      const titleGroup = document.createElement("div");
+      const descGroup = document.createElement("div");
+      const dueDateGroup = document.createElement("div");
+      const priorityGroup = document.createElement("div");
+      const completeGroup = document.createElement("div");
+
+      titleGroup.setAttribute("class", "todo-info");
+      descGroup.setAttribute("class", "todo-info");
+      dueDateGroup.setAttribute("class", "todo-info");
+      priorityGroup.setAttribute("class", "todo-info");
+      // completeGroup.setAttribute("class", "todo-info-complete");
+
       titleLabel.textContent = "Title";
       descLabel.textContent = "Description";
       dueDateLabel.textContent = "Due date";
@@ -130,6 +167,16 @@ function todoDetails(todo, project) {
       paraTitle.textContent = todo.title;
       paraDesc.textContent = todo.description;
       paraPriority.textContent = getTodoPriority(todo);
+
+      //set the id of the card by priority
+      if (getTodoPriority(todo) === "High") {
+        todoCard.setAttribute("id", "high-priority");
+      } else if (getTodoPriority(todo) === "Normal") {
+        todoCard.setAttribute("id", "normal-priority");
+      } else if (getTodoPriority(todo) === "Low") {
+        todoCard.setAttribute("id", "low-priority");
+      }
+
       paradueDate.textContent = todo.dueDate;
 
       markComplete.addEventListener("change", () => {
@@ -156,20 +203,19 @@ function todoDetails(todo, project) {
           domLoad();
         }
       });
-
-      titleLabel.append(paraTitle);
-      descLabel.append(paraDesc);
-      dueDateLabel.append(paradueDate);
-      priorityLabel.append(paraPriority);
-      completedLabel.append(markComplete);
+      titleGroup.append(titleLabel, paraTitle);
+      descGroup.append(descLabel, paraDesc);
+      dueDateGroup.append(dueDateLabel, paradueDate);
+      priorityGroup.append(priorityLabel, paraPriority);
+      completeGroup.append(completedLabel, markComplete);
       todoButtonWrapper.append(editBtn, deleteBtn);
 
       todoCard.append(
-        titleLabel,
-        descLabel,
-        dueDateLabel,
-        priorityLabel,
-        completedLabel,
+        titleGroup,
+        descGroup,
+        dueDateGroup,
+        priorityGroup,
+        completeGroup,
       );
       todoCard.appendChild(todoButtonWrapper);
 

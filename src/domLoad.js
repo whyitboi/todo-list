@@ -4,18 +4,35 @@ import { createNewTodoLoad, createNewProjectLoad } from "./createNewDomLoad.js";
 
 function createCards(parent, array, nameOfClass) {
   //create the cards loop
+
   array.forEach((project) => {
     let card = document.createElement("div");
+
+    let titleLabel = document.createElement("label");
+    let descLabel = document.createElement("label");
+
+    let titleGroup = document.createElement("div");
+    let descGroup = document.createElement("div");
+    titleGroup.setAttribute("class", "project-info");
+    descGroup.setAttribute("class", "project-info");
+
+    titleLabel.textContent = "Title";
+    descLabel.textContent = "Description";
+
     card.setAttribute("class", nameOfClass);
 
     let paraName = document.createElement("p");
     let paraDesc = document.createElement("p");
     paraName.textContent = project.name;
     paraDesc.textContent = project.description;
-    card.append(paraName, paraDesc);
+
+    titleGroup.append(titleLabel, paraName);
+    descGroup.append(descLabel, paraDesc);
+
+    card.append(titleGroup, descGroup);
+
     card.addEventListener("click", () => {
       if (project.todoLists.length < 1) {
-        //card.textContent =
         alert(`There are no ToDo lists for: ${project.name}`);
       } else todosLoad(project);
     });
