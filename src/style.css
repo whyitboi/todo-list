@@ -58,14 +58,7 @@
 }
 
 body {
-  /* display: grid; */
   min-height: 100vh;
-  /* grid-template-rows: auto repeat(2, 1fr); */
-  /* background-image:
-    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    /*for black overlay to improve readbility/ url("./background-img1.jpg");
-  background-size: cover;
-  position: relative; */
 }
 .sidebar {
   display: grid;
@@ -84,7 +77,8 @@ body {
 #todoDialog[open] {
   margin: auto;
   position: fixed;
-  padding: 2em;
+  padding: 1em;
+  background-color: #868686;
 }
 .edit-todo,
 .new-project,
@@ -92,11 +86,12 @@ body {
   display: flex;
   flex-direction: column;
   border-radius: 3px;
+  background-color: #868686;
 }
-select {
+/* select {
   width: 80%;
   margin-bottom: 15px;
-}
+} */
 /*textarea styling*/
 textarea {
   font-size: 14px;
@@ -110,7 +105,8 @@ textarea {
   resize: none;
 }
 
-.formTextArea {
+.formTextArea,
+select {
   width: 80%;
 }
 .form-row {
@@ -122,15 +118,14 @@ textarea {
   flex-wrap: wrap; */
 }
 .form-row label,
-.form-row legend {
+.form-row legend,
+select {
   margin-bottom: 15px;
 }
 label[for="description"] {
   align-self: flex-start;
 }
-label[for="projectSelect"] {
-  align-self: center;
-}
+
 /*input styling*/
 .form-row input {
   /* --bckgrnd-color: #ffffff;
@@ -177,7 +172,7 @@ button {
 
 .card {
   display: grid;
-  height: 200px;
+  height: 300px;
   overflow: hidden;
   padding: 1em;
   border-radius: 4px;
@@ -188,16 +183,19 @@ button {
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 50px 1fr;
   grid-column: 1 / span 2;
 }
 .buttonWrapper {
+  display: flex;
   grid-column: 1/-1;
+  max-height: fit-content;
 }
 .card-details {
-  padding: 1em;
-  height: fit-content;
-  width: max-content;
+  display: grid;
+  height: 300px;
   overflow: hidden;
+  padding: 1em;
   border-radius: 4px;
   border-collapse: collapse;
   border: 2px solid black;

@@ -20,7 +20,20 @@ function todosLoad(project) {
 
   const article = document.querySelector(".article");
   const todoCardWrapper = document.createElement("div");
+  const buttonWrapper = document.createElement("div");
+  const backToProjects = document.createElement("button");
   todoCardWrapper.setAttribute("class", "cardWrapper");
+  buttonWrapper.setAttribute("class", "buttonWrapper");
+
+  backToProjects.textContent = "Back to Projects";
+  backToProjects.addEventListener("click", () => {
+    domLoad();
+    console.log("Send back to " + project.name);
+  });
+
+  buttonWrapper.appendChild(backToProjects);
+
+  todoCardWrapper.appendChild(buttonWrapper);
 
   if (checkCompletedTodos(project.todoLists)) {
     alert("All todos in this project have been completed");
@@ -65,7 +78,20 @@ function todoDetails(todo, project) {
 
   const article = document.querySelector(".article");
   const todoCardWrapper = document.createElement("div");
+  const buttonWrapper = document.createElement("div");
+  const backToTodos = document.createElement("button");
+
+  buttonWrapper.setAttribute("class", "buttonWrapper");
   todoCardWrapper.setAttribute("class", "cardWrapper");
+
+  backToTodos.textContent = "Back to Todo";
+  backToTodos.addEventListener("click", () => {
+    todosLoad(project);
+  });
+
+  buttonWrapper.append(backToTodos);
+
+  todoCardWrapper.appendChild(buttonWrapper);
 
   if (checkCompletedTodos(project.todoLists)) {
     alert("All todos in this project have been completed");
@@ -99,6 +125,7 @@ function todoDetails(todo, project) {
 
       markComplete.type = "checkbox";
       todoCard.setAttribute("class", "card-details");
+      todoButtonWrapper.setAttribute("class", "buttonWrapper");
 
       paraTitle.textContent = todo.title;
       paraDesc.textContent = todo.description;
