@@ -28,7 +28,6 @@ function todosLoad(project) {
   backToProjects.textContent = "Back to Projects";
   backToProjects.addEventListener("click", () => {
     domLoad();
-    console.log("Send back to " + project.name);
   });
 
   buttonWrapper.appendChild(backToProjects);
@@ -79,17 +78,7 @@ function todosLoad(project) {
         titleGroup.append(titleLabel, paraTitle);
         deuDateGroup.append(dueDateLabel, paradueDate);
 
-        // titleLabel.append(paraTitle);
-        // dueDateLabel.append(paradueDate);
         todoCard.append(titleGroup, deuDateGroup, detailsBtn);
-
-        // todoCard.append(
-        //   titleLabel,
-        //   paraTitle,
-        //   dueDateLabel,
-        //   paradueDate,
-        //   detailsBtn,
-        // );
 
         todoCardWrapper.append(todoCard);
       }
@@ -150,7 +139,6 @@ function todoDetails(todo, project) {
       descGroup.setAttribute("class", "todo-info");
       dueDateGroup.setAttribute("class", "todo-info");
       priorityGroup.setAttribute("class", "todo-info");
-      // completeGroup.setAttribute("class", "todo-info-complete");
 
       titleLabel.textContent = "Title";
       descLabel.textContent = "Description";
