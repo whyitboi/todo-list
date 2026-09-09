@@ -46,7 +46,7 @@
   margin: 0;
   border: none;
   box-sizing: border-box;
-  --_fontFamily: var(--fontFamily, , inherit);
+  --_fontFamily: var(--fontFamily, inherit);
   --_fontColor: var(--fontColor, inherit);
   --_padding: var(--padding, inherit);
   --_fontSize: var(--fontSize, inherit);
@@ -57,8 +57,8 @@
 }
 /*variables*/
 :root {
-  --_fontFamily: var(--fontFamily, "floraItalic");
-  --_fontSize: var(--fontSize, var(clamp(1em, 0.5em, +1.5vw, 2rem), 24px));
+  --_fontFamily: var(--fontFamily, "gondolaSDRegular");
+  --_fontSize: var(--fontSize, clamp(1em, 0.5em, +1.5vw, 2rem), 24px);
   --_fontColor: var(--fontColor, black);
   --_padding: var(--padding, 1em);
   --_backgroundColor: var(--backgroundColor, white);
@@ -80,9 +80,8 @@ body {
 }
 .logo {
   font-family: var(--_fontFamily);
-  /* padding: var(--_padding); */
-  font-size: 36px;
-  /* var(--_fontFamily); */
+  --fontSize: 36px;
+  font-size: var(--_fontSize);
 }
 .dashboard {
   --backgroundColor: #e2e8f0;
